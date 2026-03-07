@@ -7,6 +7,7 @@ const _dbName = process.env.DATABASE_NAME || "admin";
 let _client;
 let _db;
 
+
 async function connectDatabase(mongoURL = _mongoURL, dbName = _dbName) {
     if (_db) return _db;
 
@@ -18,26 +19,45 @@ async function connectDatabase(mongoURL = _mongoURL, dbName = _dbName) {
     return _db;
 }
 
+function getDatabase() {
+    if (!_db) {
+        throw new Error("Database not connected. Call connectDatabase() first.");
+    }
+
+    return _db;
+}
+
+
 async function listTables() {
-    const db = await connectDatabase();
-    const collections = await db.collections();
-    const tableNames = collections.map(c => c.collectionName);
+    const db = getDatabase();
+    const collections = await db.listCollections().toArray();
+    const tableNames = collections.map(c => c.name);
 
     tableNames.forEach(name => console.log(` - ${name}`));
 
     return tableNames;
 }
 
-async function insertTable(tableName, data) {
-    const db = await connectDatabase();
+function getTable(tableName) {
+    const db = getDatabase();
+    const collection = db.collection(tableName);
 
-    const result = await db.collection(tableName).insertOne(data);
+    return collection;
+}
+
+async function insertTable(tableName, data) {
+    const db = getDatabase();
+    const table = getTable(tableName);
+
+    const result = await table.insertOne(data);
 
     return result;
 }
 
 module.exports = {
     connectDatabase,
+    getDatabase,
+    getTable,
     listTables,
     insertTable
 };

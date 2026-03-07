@@ -3,12 +3,18 @@ require("dotenv").config();
 //express server.js
 const express = require('express');
 const app = express();
-const routes = require('./api/routes');
+
+const mongodb = require("./data/database");
+// const routes = require('./api/routes');
 
 const port = process.env.PORT || 3000;
 
-app.use(routes);
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}\nlisten at \x1b[32mhttp://localhost:${port}\x1b[0m`);
-});
+mongodb.connectDatabase().then(() => {
+    const routes = require("./api/routes");
+    app.use(routes);
+
+    app.listen(port, () => {
+        console.log(`Server is running on port ${port}\nlisten at \x1b[32mhttp://localhost:${port}\x1b[0m`);
+    });
+})
