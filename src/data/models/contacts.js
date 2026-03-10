@@ -17,4 +17,25 @@ contactsModel.getAll = async () => {
     return contacts;
 }
 
+contactsModel.create = async (data) => {
+    const result = await contactsTable.insertOne(data);
+
+    return result;
+}
+
+contactsModel.update = async (id, data) => {
+    const result = await contactsTable.updateOne(
+        { _id: new ObjectId(id) },
+        { $set: data }
+    );
+
+    return result;
+}
+
+contactsModel.delete = async (id) => {
+    const result = await contactsTable.deleteOne({ _id: new ObjectId(id) });
+
+    return result;
+}
+
 module.exports = contactsModel;
