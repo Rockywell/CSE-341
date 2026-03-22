@@ -1,13 +1,12 @@
 const router = require('express').Router();
-const homeController = require('../controllers/home');
 
 router.use("/", require('./swagger'));
 
-// Home routes
-router.get('/', homeController.index);
-router.get('/about', homeController.about);
+// Customer routes
+router.use("/customers", require('./customers'));
 
-// Contact routes
-router.use("/contacts", require('./contacts'));
+
+// Product routes
+router.use("/products", require('./products'));
 
 module.exports = router;

@@ -1,8 +1,8 @@
 const { MongoClient } = require("mongodb");
-require("dotenv").config();
+const { db } = require("@config");
 
-const _mongoURL = process.env.DATABASE_URL;
-const _dbName = process.env.DATABASE_NAME || "admin";
+const _mongoURL = db.url;
+const _dbName = db.name;
 
 let _client;
 let _db;

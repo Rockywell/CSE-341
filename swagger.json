@@ -1,13 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Contacts API",
-    "description": "API for managing contacts",
+    "title": "Products API",
+    "description": "API for managing products",
     "version": "1.0.0"
   },
-  "host": "cse-341-pro9.onrender.com",
+  "host": "localhost:5050",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
   "paths": {
@@ -31,10 +32,20 @@
         }
       }
     },
-    "/contacts/": {
+    "/api-docs": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/customers/": {
       "get": {
         "tags": [
-          "Contacts"
+          "customers"
         ],
         "description": "",
         "responses": {
@@ -45,7 +56,7 @@
       },
       "post": {
         "tags": [
-          "Contacts"
+          "customers"
         ],
         "description": "",
         "parameters": [
@@ -56,19 +67,13 @@
               "type": "object",
               "properties": {
                 "firstName": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "lastName": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
-                  "example": "any"
+                  "type": "string"
                 }
               }
             }
@@ -84,10 +89,10 @@
         }
       }
     },
-    "/contacts/{id}": {
+    "/customers/{id}": {
       "get": {
         "tags": [
-          "Contacts"
+          "customers"
         ],
         "description": "",
         "parameters": [
@@ -106,7 +111,7 @@
       },
       "put": {
         "tags": [
-          "Contacts"
+          "customers"
         ],
         "description": "",
         "parameters": [
@@ -123,19 +128,13 @@
               "type": "object",
               "properties": {
                 "firstName": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "lastName": {
-                  "example": "any"
+                  "type": "string"
                 },
                 "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
-                  "example": "any"
+                  "type": "string"
                 }
               }
             }
@@ -152,7 +151,152 @@
       },
       "delete": {
         "tags": [
-          "Contacts"
+          "customers"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "products"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                },
+                "stock": {
+                  "type": "integer"
+                },
+                "manufacturer": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "products"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                },
+                "stock": {
+                  "type": "integer"
+                },
+                "manufacturer": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "products"
         ],
         "description": "",
         "parameters": [

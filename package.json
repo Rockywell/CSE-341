@@ -3,19 +3,25 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
+  "type": "commonjs",
+  "_moduleAliases": {
+    "@config": "src/config"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "swagger": "node swagger.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Porter Frazier",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "body-parser": "^2.2.2",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "express-validator": "^7.3.1",
+    "module-alias": "^2.3.4",
     "mongodb": "^7.1.0",
     "swagger-ui-express": "^5.0.1"
   },
