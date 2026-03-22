@@ -5,12 +5,7 @@
     "description": "API for managing products",
     "version": "1.0.0"
   },
-  "host": "localhost:5050",
   "basePath": "/",
-  "schemes": [
-    "http",
-    "https"
-  ],
   "paths": {
     "/": {
       "get": {
