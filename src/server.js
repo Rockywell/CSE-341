@@ -36,7 +36,7 @@ mongodb.connectDatabase().then(() => {
             });
         });
 
-    app.listen(server.port, server.host, () => {
+    app.listen(server.port, () => {
         console.log(`Server is running on \x1b[32m${server.protocol}://${server.host}:${server.port}\x1b[0m`);
     });
 }).catch((err) => {
