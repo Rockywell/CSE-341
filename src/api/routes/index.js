@@ -1,4 +1,5 @@
 const passport = require('passport');
+const { handleErrors } = require('../../utils');
 
 const router = require('express').Router();
 
@@ -12,13 +13,13 @@ router.use("/customers", require('./customers'));
 router.use("/products", require('./products'));
 
 //Auth routes
-router.get("/login", passport.authenticate('github'), (req, user) => { });
+router.get("/login", passport.authenticate('github'), handleErrors((req, user) => { }));
 
-router.get("/logout", (req, res, next) => {
+router.get("/logout", handleErrors((req, res, next) => {
     req.logout(err => {
         if (err) { return next(err) }
         res.redirect("/");
     })
-})
+}));
 
 module.exports = router;

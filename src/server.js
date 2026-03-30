@@ -41,19 +41,7 @@ mongodb.connectDatabase().then(() => {
     app
         .use(cors({ methods: ['GET', 'POST', 'PUT', 'DELETE', 'UPDATE', 'PATCH'] }))
         .use(cors({ origin: '*' }))
-        .use('/', routes)
-        .use((req, res, next) => {
-            res.status(404).json({
-                message: `Route not found: ${req.originalUrl}`
-            });
-        })
-        .use((err, req, res, next) => {
-            console.error(`Error at: "${req.originalUrl}": ${err.message}`);
-
-            res.status(err.status || 500).json({
-                message: err.message || 'Internal server error'
-            });
-        });
+        .use('/', routes);
 
     passport.use(new GitHubStrategy({
         clientID: server.clientID,
@@ -78,6 +66,20 @@ mongodb.connectDatabase().then(() => {
         (req, res) => {
             req.session.user = req.user;
             res.redirect("/");
+        });
+
+    app
+        .use((req, res, next) => {
+            res.status(404).json({
+                message: `Route not found: ${req.originalUrl}`
+            });
+        })
+        .use((err, req, res, next) => {
+            console.error(`Error at: "${req.originalUrl}": ${err.message}`);
+
+            res.status(err.status || 500).json({
+                message: err.message || 'Internal server error'
+            });
         });
 
     app.listen(server.port, () => {
